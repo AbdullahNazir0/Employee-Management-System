@@ -55,7 +55,7 @@ int EmployeeManager::getNumberOfPartTimeEmployees()
 // crud
 void EmployeeManager::addEmployee()
 {
-    clear();
+    loadEmployees();
     int choice;
     while (true)
     {
@@ -89,6 +89,7 @@ void EmployeeManager::addEmployee()
 
 void EmployeeManager::updateEmployee()
 {
+    // clear();
     loadEmployees();
     int choice, empId;
 
@@ -106,6 +107,7 @@ void EmployeeManager::updateEmployee()
                 if (fullTimeEmployees[i]->getId() == empId)
                 {
                     fullTimeEmployees[i]->set_fulltime_employee_data();
+                    saveEmployees();
                     return;
                 }
             }
@@ -119,6 +121,7 @@ void EmployeeManager::updateEmployee()
                 if (partTimeEmployees[i]->getId() == empId)
                 {
                     partTimeEmployees[i]->set_partime_employee_details();
+                    saveEmployees();
                     return;
                 }
             }
@@ -154,6 +157,7 @@ void EmployeeManager::deleteEmployee()
                     {
                         fullTimeEmployees[j] = fullTimeEmployees[j + 1];
                     }
+                    saveEmployees();
                     return;
                 }
             }
@@ -171,6 +175,7 @@ void EmployeeManager::deleteEmployee()
                     {
                         partTimeEmployees[j] = partTimeEmployees[j + 1];
                     }
+                    saveEmployees();
                     return;
                 }
             }
@@ -257,7 +262,7 @@ void EmployeeManager::displayEmployees()
 void EmployeeManager::saveEmployees()
 {
 
-    ofstream fout("FullTimeEmployees.dat", ios::binary | ios::app);
+    ofstream fout("FullTimeEmployees.dat", ios::binary | ios::trunc);
     if (!fout)
     {
         cerr << "Error opening file FullTimeEmployees.dat for writing\n";
@@ -277,7 +282,7 @@ void EmployeeManager::saveEmployees()
     fout.close();
 
     // Save Part Time Employees
-    ofstream fout2("PartTimeEmployees.dat", ios::binary | ios::app);
+    ofstream fout2("PartTimeEmployees.dat", ios::binary | ios::trunc);
     if (!fout2)
     {
         cerr << "Error opening file PartTimeEmployees.dat for writing\n";
