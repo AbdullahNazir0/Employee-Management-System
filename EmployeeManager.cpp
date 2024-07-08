@@ -153,7 +153,7 @@ void EmployeeManager::deleteEmployee()
                 if (fullTimeEmployees[i]->getId() == empId)
                 {
                     delete fullTimeEmployees[i];
-                    for (int j = i; j < numberOfFullTimeEmployees; j++)
+                    for (int j = i; j < numberOfFullTimeEmployees - 1; j++)
                     {
                         fullTimeEmployees[j] = fullTimeEmployees[j + 1];
                     }
@@ -171,7 +171,7 @@ void EmployeeManager::deleteEmployee()
                 if (partTimeEmployees[i]->getId() == empId)
                 {
                     delete partTimeEmployees[i];
-                    for (int j = i; j < numberOfPartTimeEmployees; j++)
+                    for (int j = i; j < numberOfPartTimeEmployees - 1; j++)
                     {
                         partTimeEmployees[j] = partTimeEmployees[j + 1];
                     }
